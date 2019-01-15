@@ -10,9 +10,6 @@ import Footer from './components/Footer';
 import Fighters from './components/Fighters';
 import axios from 'axios';
 
-
-
-
 class App extends Component {
  
   
@@ -48,16 +45,18 @@ class App extends Component {
     return (    
 
       <div className="App">
+    
+      
+    
       <Container> 
        
            <Header/>
           <Search/>
-          <Table striped>
-        <thead>FIGHTERS
-          <tr><td><th>name</th></td><td><th>bio</th></td> <td><th>image</th></td></tr>      
+         
+            
    <Row className="row"><Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} />
-     </Row>   </thead>
-       </Table>
+     </Row>   
+       
      <Footer copy={2019}/>
      </Container> 
      </div>

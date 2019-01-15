@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button} from 'reactstrap'
+import { Button, Table, CardImg} from 'reactstrap'
 
 
 const sbutton = {
@@ -23,9 +23,7 @@ const leftColumn = {
 
 
 class Fighter extends Component {
-
-
-
+  
   handleChange = e => {
     let { name, value } = e.target
     this.setState({ [name]: value })
@@ -33,17 +31,26 @@ class Fighter extends Component {
   }
 
   render() {   
-    console.log("removeFighterFromList", this.props.fighter.id)
+    console.log("fighter ", this.props.fighter.id)
 
     return this.props.removeFighterFromList ?(
-
       <div className="leftColumn" style={leftColumn.styles}>
-        <div className="title">{this.props.fighter.name}</div>
-        <div className="author">{this.props.fighter.bio}</div>
-        <div className="description">{this.props.fighter.image_url}</div>
+     
+    
+     <Table striped>
+
+   <tbody>
+     <tr>
+       <th scope="row"></th>
+       <td>{this.props.fighter.name}</td>
+       <td>{this.props.fighter.bio}</td>
+       <td><CardImg src={this.props.fighter.image_url} alt="Card image" /></td>
+       <td>{this.props.fighter.strength}</td>
+     </tr>
+   </tbody>
+ </Table>
  
-        <div className="strength">{this.props.fighter.strength}
-        </div>
+     
 
         <div className="button"><Button onClick={() => this.props.removeFighterFromList(this.props.fighter.id)} style={sbutton.styles}>Remove Fighter {this.props.fighter.id}</Button></div>
 
