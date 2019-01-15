@@ -35,7 +35,7 @@ class App extends Component {
   
 
   removeFighterFromList = id => {
-    axios.patch(`http://localhost:8000/fighters/remove/${id}`)
+    axios.delete(`http://localhost:8000/fighters/remove/${id}`)
     .then(res => {
       let otherFighters = this.state.fighters
     this.setState({ fighters: [...otherFighters.filter(fighter => fighter.id !== id), res.data]})
