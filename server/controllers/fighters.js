@@ -24,7 +24,7 @@ add: (req, res) => {
     .then(newFighter => res.json(newFghter[0]))
 },
 
-  update:(req, res) => {
+update:(req, res) => {
     knex('fighters')
     .where('id', req.params.id)
     .update({
@@ -52,7 +52,7 @@ delete: (req, res) => {
     knex('fighters')
     .where('id', req.params.id)
     .del().returning('*')
-    .then((fighter) => res.json(fighter))
+    .then(fighter => res.json(fighter))
     }   
 
 

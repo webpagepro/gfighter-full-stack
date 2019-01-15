@@ -12,6 +12,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "bootstrap": "^4.2.1",
+    "cors": "^2.8.5",
     "express": "^4.16.2",
     "knex": "^0.13.0",
     "pg": "^7.3.0",
