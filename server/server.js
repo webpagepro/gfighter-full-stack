@@ -1,20 +1,20 @@
-const path = require('path');
-const express = require('express');
+const express = require("express");
+const path = require("path");
+const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 8000;
-const cors = require('cors');
-const logger = require('morgan');
-const knex = require('./db/knex');
+app.use(bodyParser.json({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const app = express();
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
-app.use(logger('dev'));
-app.use(cors());
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }));
-
-app.use('/', require('./config/routes'));
+var routes_setter = require('./config/routes.js');
+routes_setter(app);
 
 app.listen(port, function() {
-  console.log("listening on port: ", port);
-})
+  console.log('Listening on', port);
+});
