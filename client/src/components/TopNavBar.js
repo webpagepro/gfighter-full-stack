@@ -1,21 +1,13 @@
+
 import React, { Component } from 'react'
 
-import  { withRouter } from 'react-router-dom'
-import ExpenseList from './ExpenseList'
 
-class TopNavBar extends Component {
-
-    render(){
-        let storedExpenses = this.props.expenses.map(expense => {
-       return <Expense key={expense.id} expense={expense} addExpenseToDebtList={this.props.addExpenseToDebtList} />
-        })
-
+class ToopNavBar extends Component {
+    render () {
         return (
-            <div>
-           {storedExpenses} 
-              </div>                                         
+            <h5>Fighters</h5>
+        )
+    }
+}
 
-  )
-}
-}
-export default withRouter(TopNavBar)
+export default ToopNavBar

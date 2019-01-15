@@ -5,8 +5,7 @@ return (
     <>
   
 <nav className="navbar navbar-dark bg-primary">
-  <a className="navbar-brand" href="/">Expense Tracker</a>
-  <div className="slogan">Learn your spending habits...</div>
+  <a className="navbar-brand" href="/">Fighters</a>
 </nav>
 </>
 ) 

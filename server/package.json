@@ -11,8 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "bootstrap": "^4.2.1",
     "express": "^4.16.2",
     "knex": "^0.13.0",
-    "pg": "^7.3.0"
+    "pg": "^7.3.0",
+    "reactstrap": "^7.0.2"
   }
 }

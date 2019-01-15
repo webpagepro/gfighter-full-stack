@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
 
 
 const searchInput = {
@@ -27,13 +27,15 @@ const button = {
 class Search extends Component {
     render () {
         return (
+            <>
             <Form>
                 <FormGroup>
-                    <Label style={searchHere.styles}for="exampleEmail">Search For a Book Here</Label>
+                    <Label style={searchHere.styles}for="exampleEmail">Search For a Fighter Here</Label>
                     <Input onChange={this.props.filterBookSearch} style={searchInput.styles} type="text" name="search" id="" placeholder="..." />
                     <Button style={button.styles} color="primary" size="sm">Search</Button>
                 </FormGroup>
             </Form>
+            </>
         )
     }
 }
