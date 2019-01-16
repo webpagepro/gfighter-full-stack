@@ -21,7 +21,7 @@ const knex = require('../db/knex');
 add: (req, res) => {
   knex('fighters')
     .insert(req.body, '*')
-    .then(newFighter => res.json(newFghter[0]))
+    .then(newFighter => res.json(newFghter))
 },
 
 update:(req, res) => {
@@ -45,7 +45,7 @@ plus:(req, res) => {
       image_url: req.body.image_url,
       strength: req.body.strength
       }, '*')
-  .then(fighter => res.json(fighter))
+  .then(fighter => res.json(fighter[0]))
 },
 
 delete: (req, res) => {

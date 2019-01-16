@@ -7,7 +7,7 @@ import Search from './components/Search.js';
 import Header from './components/Header.js';
 import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';
-import Fighters from './components/Fighters';
+import Fighters from './components/Fighters'
 
 class App extends Component {
 
@@ -18,11 +18,19 @@ class App extends Component {
     return (
       <div className="App">
 
-     <Switch>
-          <Route exact path="/" component={Fighters}/>
+    
+<Container> 
+       
+       <Header/>
+      <Search/>
+     
         
-          
-</Switch></div>
+<Row className="row"><Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} />
+ </Row>   
+   
+ <Footer copy={2019}/>
+ </Container> 
+ </div>
     );
   }
 }

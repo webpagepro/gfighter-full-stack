@@ -23,14 +23,12 @@ render(){
 
       return(
 
-            <>   <Table striped></Table> 
-        <thead>FIGHTERS
-          <tr><td><th>name</th><th>bio</th> <th>image</th><th>power</th></td></tr>
-        <tr>    <td>
+            <>  
+        FIGHTERS
+       
             {listOfFighters}
-            </td>
-          </tr>
-</thead>
+     
+
           </>
       )}
 }

@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 
-//import logo from './logo.svg';  import Search from './components/Search';
+import Search from './components/Search';
 import { Row, Container, Table, PropTypes,  } from 'reactstrap'
 import './App.css';
-import Search from './components/Search.js';
-import Header from './components/Header.js';
-import TopNavBar from './components/TopNavBar';
-import Footer from './components/Footer';
-import Fighters from './components/Fighters';
+import App2 from './App2'
 import axios from 'axios';
+import { render, IndexRoute} from 'react-dom';
+import {
+  BrowserRouter as Router,
+  Route, Switch, 
+  Link
+} from 'react-router-dom'
+import Fighters from './components/Fighters';
+
 
 class App extends Component {
- 
+ Home = () => {
+  return (<h1>Home</h1>)
+ }
   
   state={
     fighters: [],
-     strength: 100
+     strength: 100,
+     filteredSearch: ''
   }
 
   async componentDidMount() {
@@ -29,7 +36,11 @@ class App extends Component {
       this.setState({fighters: json}) 
   }
 
-  
+  filteredCategorySearch = (e) => {
+    this.setState({
+      filteredSearch: e.target.value
+    })
+}
 
   removeFighterFromList = id => {
     axios.delete(`http://localhost:8000/fighters/remove/${id}`)
@@ -40,28 +51,39 @@ class App extends Component {
     })
   }
 
+  addFighterToList = id => {
+    axios.post(`http://localhost:8000/fighters/${id}`)
+    .then(res => {
+      let otherFighters = this.state.fighters
+    this.setState({ fighters: [...otherFighters.filter(fighter => fighter.id !== id), res.data]})
+  console.log("App.js - addFighterToList: ", res.data)
+    })
+  }
+
+    // <li><Link to='/'>Home</Link></li>
+     // <li><Link to='/fighters' >Bio</Link></li>
   render() {
 
-    return (    
+    return (      
+    
+    <div className="App">
+     
+     <Router><ul>
 
-      <div className="App">
-    
-      
-    
-      <Container> 
+
+<Switch>
+            <Route path="/"  component={App2} fighter={this.state.fighters} removeFighterFromList={this.removeFighterFromList}/>
+            <Route path="/fighters" render={(props) => <Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} />} />
+            <Route path='/fighters/:id' component={App2}  />
+</Switch>
+     
+     
+       </ul>
        
-           <Header/>
-          <Search/>
-         
-            
-   <Row className="row"><Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} />
-     </Row>   
-       
-     <Footer copy={2019}/>
-     </Container> 
-     </div>
+       </Router>
+      </div>
     );
   }
 }
+export default App
 
-export default App;
