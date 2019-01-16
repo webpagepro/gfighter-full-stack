@@ -70,13 +70,14 @@ class App extends Component {
      
      <Router><ul>
 
-
+    <li><Link to='/'>Home</Link></li>
+    <li><Link to='/fighters' >Bio</Link></li>
 <Switch>
-            <Route path="/"  component={App2} fighter={this.state.fighters} removeFighterFromList={this.removeFighterFromList}/>
-            <Route path="/fighters" render={(props) => <Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} />} />
+            <Route path="/" exact strict component={App2} fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} filteredSearch={this.state.filteredSearch} />
+            <Route path="/fighters" render={(props) => <Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} filteredSearch={this.state.filteredSearch} />} />
             <Route path='/fighters/:id' component={App2}  />
 </Switch>
-     
+      
      
        </ul>
        
