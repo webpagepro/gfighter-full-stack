@@ -12,7 +12,7 @@ import {
   Link
 } from 'react-router-dom'
 import Fighters from './components/Fighters';
-
+import Fighter from './components/Fighter';
 
 class App extends Component {
  Home = () => {
@@ -43,10 +43,10 @@ class App extends Component {
 }
 
   removeFighterFromList = id => {
-    axios.delete(`http://localhost:8000/fighters/remove/${id}`)
+    axios.delete(`http://localhost:8000/fighters/${id}`)
     .then(res => {
       let otherFighters = this.state.fighters
-    this.setState({ fighters: [...otherFighters.filter(fighter => fighter.id !== id), res.data]})
+    this.setState({ fighters: [...otherFighters.filter(fighter => fighter.id !== id)]})
   console.log("App.js - removeFighterFromDebt: ", res.data)
     })
   }
@@ -60,6 +60,14 @@ class App extends Component {
     })
   }
 
+
+getIndividualFighter = id => {
+    axios.get(`http://localhost:8000/fighters/${id}`)
+    .then(res => {
+    this.setState({ fighters: res.data})
+  console.log("App.js - removeFighterFromDebt: ", res.data)
+    })
+  }
     // <li><Link to='/'>Home</Link></li>
      // <li><Link to='/fighters' >Bio</Link></li>
   render() {
@@ -71,11 +79,10 @@ class App extends Component {
      <Router><ul>
 
     <li><Link to='/'>Home</Link></li>
-    <li><Link to='/fighters' >Bio</Link></li>
+    <li><Link to='/fighters/:id' >List</Link></li>
 <Switch>
-            <Route path="/" exact strict component={App2} fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} filteredSearch={this.state.filteredSearch} />
-            <Route path="/fighters" render={(props) => <Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} filteredSearch={this.state.filteredSearch} />} />
-            <Route path='/fighters/:id' component={App2}  />
+            <Route exact path="/" render={(props) => <Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} filteredSearch={this.state.filteredSearch}  />} />
+            <Route path='/fighters/:id' component={Fighter}  />
 </Switch>
       
      
@@ -88,3 +95,4 @@ class App extends Component {
 }
 export default App
 
+       

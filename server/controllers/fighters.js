@@ -5,6 +5,11 @@ const knex = require('../db/knex');
 
 
   module.exports = {
+    index: (req, res) => {
+        knex(fighters)
+        .then(fighter => res.json(fighter))
+    },
+
     individual:(req, res) => {
       knex('fighters')
       .where('id', req.params.id)
