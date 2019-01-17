@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Table, CardImg} from 'reactstrap'
-import { Link } from 'react-router-dom'
+
 
 const sbutton = {
   styles: {
@@ -31,8 +31,7 @@ class Fighter extends Component {
   }
 
   render() {   
-
-
+    console.log("fighter ", this.props.fighter.id)
 
     return this.props.removeFighterFromList ?(
       <div className="leftColumn" style={leftColumn.styles}>
@@ -43,9 +42,9 @@ class Fighter extends Component {
    <tbody>
      <tr>
        <th scope="row"></th>
-       <td><Link to={`fighters/${this.props.fighter.id}`} >{this.props.fighter.name}</Link></td>
+       <td>{this.props.fighter.name}</td>
        <td>{this.props.fighter.bio}</td>
-       {/*<td><CardImg width='50' src={this.props.fighter.image_url} alt="Card image" /></td> */}
+       <td><CardImg src={this.props.fighter.image_url} alt="Card image" /></td>
        <td>{this.props.fighter.strength}</td>
      </tr>
    </tbody>
@@ -56,7 +55,7 @@ class Fighter extends Component {
         <div className="button"><Button onClick={() => this.props.removeFighterFromList(this.props.fighter.id)} style={sbutton.styles}>Remove Fighter {this.props.fighter.id}</Button></div>
 
       </div>
-    ):(<div>loading</div>)
+    ):(<div>error loading props: FighterID</div>)
   }
 }
 export default Fighter

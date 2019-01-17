@@ -32,20 +32,13 @@ class Search extends Component {
                 <FormGroup>
                     <Label style={searchHere.styles}for="exampleEmail">Search For a Fighter Here</Label>
                     <Input onChange={this.props.filterBookSearch} style={searchInput.styles} type="text" name="search" id="" placeholder="..." />
-                    <Button style={button.styles} color="primary" size="sm">Search</Button>
+                
                 </FormGroup>
             </Form>
             </>
         )
     }
 }
-
-
-
-
-
-
-
 
 
 export default Search;

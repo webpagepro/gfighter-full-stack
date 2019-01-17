@@ -1,98 +1,98 @@
 import React, { Component } from 'react';
 
 import Search from './components/Search';
-import { Row, Container, Table, PropTypes,  } from 'reactstrap'
+import { Row, Container, Table, PropTypes, } from 'reactstrap'
 import './App.css';
 import App2 from './App2'
 import axios from 'axios';
-import { render, IndexRoute} from 'react-dom';
+import { render, IndexRoute } from 'react-dom';
 import {
   BrowserRouter as Router,
-  Route, Switch, 
-  Link
+  Route, Switch, Link
 } from 'react-router-dom'
 import Fighters from './components/Fighters';
-import Fighter from './components/Fighter';
+import FighterIndvidual from './components/FighterIndvidual';
+
 
 class App extends Component {
- Home = () => {
-  return (<h1>Home</h1>)
- }
-  
-  state={
+  Home = () => {
+    return (<h1>Home</h1>)
+  }
+
+  state = {
     fighters: [],
-     strength: 100,
-     filteredSearch: ''
+    strength: 100,
+    filteredSearch: ''
   }
 
   async componentDidMount() {
     const response = await fetch('http://localhost:8000/fighters/')
     const json = await response.json()
-     if(!response)
-     {
+    if (!response) {
       console.log("failed api response")
-     }  
-      console.log("async: ", this)
-      this.setState({fighters: json}) 
+    }
+    console.log("async: ", this)
+    this.setState({ fighters: json })
   }
 
-  filteredCategorySearch = (e) => {
+  filteredFighterSearch = (e) => {
     this.setState({
       filteredSearch: e.target.value
     })
-}
+  }
 
   removeFighterFromList = id => {
     axios.delete(`http://localhost:8000/fighters/${id}`)
-    .then(res => {
-      let otherFighters = this.state.fighters
-    this.setState({ fighters: [...otherFighters.filter(fighter => fighter.id !== id)]})
-  console.log("App.js - removeFighterFromDebt: ", res.data)
-    })
+      .then(res => {
+        let otherFighters = this.state.fighters
+        this.setState({ fighters: [...otherFighters.filter(fighter => fighter.id !== id)] })
+        console.log("App.js - removeFighterFromDebt: ", res.data)
+      })
   }
 
   addFighterToList = id => {
     axios.post(`http://localhost:8000/fighters/${id}`)
-    .then(res => {
-      let otherFighters = this.state.fighters
-    this.setState({ fighters: [...otherFighters.filter(fighter => fighter.id !== id), res.data]})
-  console.log("App.js - addFighterToList: ", res.data)
-    })
+      .then(res => {
+        let otherFighters = this.state.fighters
+        this.setState({ fighters: [...otherFighters.filter(fighter => fighter.id !== id), res.data] })
+        console.log("App.js - addFighterToList: ", res.data)
+      })
   }
 
 
-getIndividualFighter = id => {
+  getIndividualFighter = id => {
     axios.get(`http://localhost:8000/fighters/${id}`)
-    .then(res => {
-    this.setState({ fighters: res.data})
-  console.log("App.js - removeFighterFromDebt: ", res.data)
-    })
+      .then(res => {
+        this.setState({ fighters: res.data })
+        console.log("App.js - getIndividualFighter: ", res.data)
+      })
+    console.log("getIndividualFighter: ", this.res.data)
+
   }
-    // <li><Link to='/'>Home</Link></li>
-     // <li><Link to='/fighters' >Bio</Link></li>
+
   render() {
 
-    return (      
-    
-    <div className="App">
-     
-     <Router><ul>
+    return (
 
-    <li><Link to='/'>Home</Link></li>
-    <li><Link to='/fighters/:id' >List</Link></li>
-<Switch>
-            <Route exact path="/" render={(props) => <Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} filteredSearch={this.state.filteredSearch}  />} />
-            <Route path='/fighters/:id' component={Fighter}  />
+      <div className="App">
+        <Search fighters={this.state.fighters.filter(ordered => ordered.name.includes(this.state.filteredSearch))} filteredFighterSearch={this.filteredFighterSearch} />
+        <Router><ul>
+
+          <li><Link to='/'>Home</Link></li>
+          <li><Link to='/fighters/:id' params={{ id: this.state.id }}>Test</Link></li>
+          <Switch>
+            <Route exact path="/" render={(props) => <Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} filteredSearch={this.state.filteredSearch} getIndividualFighter={this.getIndividualFighter} />} />
+
+            <Route path='/fighters/:id' component={FighterIndvidual} fighters={this.state.fighters} />} />
 </Switch>
-      
-     
-       </ul>
-       
-       </Router>
+
+
+        </ul>
+
+        </Router>
       </div>
     );
   }
 }
 export default App
 
-       
