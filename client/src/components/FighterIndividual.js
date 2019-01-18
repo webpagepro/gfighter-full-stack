@@ -13,13 +13,13 @@ type: 'title'
  
 render(){
  
-
+console.log("FighterIndividual: ", this.props.id)
       return(
 
             <>  
         FIGHTERS
        
-           <FightersID id={this.props.fighter }  />
+           <FightersID id={this.props.id }  />
 
           </>
    )}

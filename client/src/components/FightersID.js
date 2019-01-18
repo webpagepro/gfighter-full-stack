@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Table, CardImg} from 'reactstrap'
+import axios from 'axios';
 
 
 const sbutton = {
@@ -21,40 +22,44 @@ const leftColumn = {
   }
 }
 
-
+ 
 class Fighter extends Component {
-  
+  state={
+    fighter: {}
+  }
+
+
   handleChange = e => {
     let { name, value } = e.target
     this.setState({ [name]: value })
-
   }
 
+componentDidMount(){
+   
+  // let getFighter = id => {
+   axios.get(`http://localhost:8000/fighters/${this.props.id}`)
+   .then(res => {  
+                   this.setState({fighter: res.data})
+   })
+}
+
   render() {   
-
-    return this.props.removeFighterFromList ?(
-      <div className="leftColumn" style={leftColumn.styles}>
+  console.log(this.props.id)
      
-    
-     <Table striped>
+ return(
 
+   <div>  
+ <Table striped>
    <tbody>
      <tr>
        <th scope="row"></th>
-       <td>{this.props.fighter.name}</td>
-       <td>{this.props.fighter.bio}</td>
-       <td><CardImg src={this.props.fighter.image_url} alt="Card image" /></td>
-       <td>{this.props.fighter.strength}</td>
+      <td>{this.state.fighter.name}</td>
      </tr>
    </tbody>
  </Table>
- 
-     
+ </div> 
+  )   
+ }
 
-        <div className="button"><Button onClick={() => this.props.removeFighterFromList(this.props.fighter.id)} style={sbutton.styles}>Remove Fighter {this.props.fighter.id}</Button></div>
-
-      </div>
-    ):(<div>error loading props: FighterID</div>)
-  }
 }
 export default Fighter

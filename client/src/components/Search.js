@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import { Form, FormGroup, Label, Input} from 'reactstrap';
 
 
 const searchInput = {
@@ -17,12 +17,7 @@ const searchHere = {
     }
 }
 
-const button = {
-    styles: {
-        marginTop: "1%",
-        marginLeft: "47.5%"
-    }
-}
+
 
 class Search extends Component {
     render () {
