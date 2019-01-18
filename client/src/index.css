@@ -13,8 +13,62 @@ code {
     monospace;
 }
 
-.strength{
+.strength-single{
   font-weight:bold;
   font-size: 1em;
 }
 
+.name-single{
+  min-width:100%;
+  font-family:'arial';
+  font-weight: bold;
+  text-align:left;
+   padding-right:8px;
+}
+
+.bio-single{
+  font-size:.8em;
+  text-align:left;
+  width:400px;
+  height:20px;
+}
+
+.form-group label{
+  text-align:left;
+}
+
+.image_url-single{
+  max-width: 80px;
+  height: auto;
+}
+
+
+.bio-list{
+  font-size:.8em;
+  text-align:left;
+  width:400px;
+  height:20px;
+}
+tr.list{
+  max-width:20%;
+  height: 20px;
+  text-align:left;
+}
+
+.name-list{
+  width:20%;
+  font-family:'arial';
+  font-weight: bold;
+  text-align:left;
+   padding-right:8px;
+}
+
+ul {
+
+  margin-right: 30px;
+}
+
+th .scope {
+ text-align:left;
+ width:2px;
+}

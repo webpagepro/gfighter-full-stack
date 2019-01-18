@@ -35,18 +35,18 @@ class Fighter extends Component {
 
 
     return this.props.removeFighterFromList ?(
-      <div className="leftColumn" style={leftColumn.styles}>
+      <div className="none" style={leftColumn.styles}>
      
     
      <Table striped>
 
    <tbody>
-     <tr>
+     <tr className="list">
        <th scope="row"></th>
-       <td><Link to={`fighters/${this.props.fighter.id}`} >{this.props.fighter.name}</Link></td>
-       <td>{this.props.fighter.bio}</td>
+       <td className="name-list"><Link to={`fighters/${this.props.fighter.id}`} >{this.props.fighter.name}</Link></td>
+       <td className="bio-list">{this.props.fighter.bio}</td>
        {/*<td><CardImg width='50' src={this.props.fighter.image_url} alt="Card image" /></td> */}
-       <td>{this.props.fighter.strength}</td>
+       <td className="strength-list">{this.props.fighter.strength}</td>
      </tr>
    </tbody>
  </Table>

@@ -13,13 +13,13 @@ type: 'title'
  
 render(){
  
-console.log("FighterIndividual: ", this.props.id)
+console.log("FighterIndividual: ", this.props)
       return(
 
             <>  
         FIGHTERS
        
-           <FightersID id={this.props.id }  />
+           <FightersID id={this.props.id }  removeFighterFromList={this.props.removeFighterFromList} />
 
           </>
    )}

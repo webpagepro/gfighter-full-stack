@@ -53,10 +53,14 @@ componentDidMount(){
    <tbody>
      <tr>
        <th scope="row"></th>
-      <td>{this.state.fighter.name}</td>
+      <td className="name-single">{this.state.fighter.name}</td>
+      <td className="bio-single">{this.state.fighter.bio}</td>
+      <td className="image_url-single"><CardImg src={this.state.fighter.image_url} alt={this.state.fighter.name}/></td>
+      <td className="power-single">{this.state.fighter.strength}</td>
      </tr>
    </tbody>
  </Table>
+      <div className="button"><Button onClick={() => this.state.removeFighterFromList(this.state.fighter.id)} style={sbutton.styles}>Remove Fighter {this.state.fighter.id}</Button></div>
  </div> 
   )   
  }
