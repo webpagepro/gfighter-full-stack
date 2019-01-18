@@ -62,15 +62,6 @@ class App extends Component {
   }
 
 
-  getIndividualFighter = id => {
-    axios.get(`http://localhost:8000/fighters/${id}`)
-    .then(res => {
-    this.setState({fighter: res.data})
-  console.log("App.js - getIndividualFighter: ", res.data)
-    })
-  }
-   
-
   render() {
     return (      
 
@@ -84,7 +75,7 @@ class App extends Component {
             <Route exact path="/" render={(props) => <Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} filteredSearch={this.state.filteredSearch}  getIndividualFighter={this.getIndividualFighter} />} />
             <Route exact path='/fighters/:id' render={(data) =>  {
                 console.log("APP: ", data)
-                return <FighterIndividual id={data.match.params.id} getIndividualFighter={this.getIndividualFighter}/>
+                return <FighterIndividual id={data.match.params.id} />
             }  }/> 
            
 </Switch>

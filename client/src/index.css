@@ -18,18 +18,23 @@ code {
   font-size: 1em;
 }
 
+.strength-list{
+  font-weight:bold;
+}
+
 .name-single{
   min-width:100%;
   font-family:'arial';
   font-weight: bold;
   text-align:left;
    padding-right:8px;
+   width:18%
 }
 
 .bio-single{
   font-size:.8em;
   text-align:left;
-  width:400px;
+  width:50%;
   height:20px;
 }
 
@@ -68,7 +73,59 @@ ul {
   margin-right: 30px;
 }
 
-th .scope {
+th .scope,th {
  text-align:left;
  width:2px;
+}
+
+@media  (min-width: 922px){
+  .bio-single{
+    font-size:1em;
+  }
+
+  .name-single{
+    font-size:2em;
+  }
+}
+
+@media  (min-width: 1103px){
+  .button{
+    position:relative;
+    top:-70px;
+  }
+ td.bio-list {
+    width:50%;
+  }
+
+}
+
+@media  (min-width: 15px){
+  .button{
+  
+  }
+}
+
+.power-single{
+  font-weight:bold;
+  font-size:20px;
+}
+
+table.table-striped{
+  margin-right:40px;
+}
+
+span{
+  margin-right:89px;
+}
+
+.button-edit{
+  float:left;
+  position:relative;
+  top:-70px;
+}
+
+.editFighterForm{
+  display:flex;
+  flex-direction: column;
+  width: 30%;
 }

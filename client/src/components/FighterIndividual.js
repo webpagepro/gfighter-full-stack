@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import App from '../App'
-import { Row, Container, Table, PropTypes,  } from 'reactstrap'
 import FightersID from './FightersID';
 
 
