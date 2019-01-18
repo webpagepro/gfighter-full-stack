@@ -10,12 +10,23 @@ filteredSearch:  '',
 type: 'title'
 
  })
- 
+
 render(){
 
-   let listOfFighters = this.props.fighters
 
-   .map(fighter => <Fighter key={fighter.id} fighter={fighter} removeFighterFromList={this.props.removeFighterFromList} />)
+  if(!this.props.fighters) {
+  return <div>loading</div> 
+ }
+
+ let listOfFighters = this.props.fighters
+
+ .map(fighter => <Fighter key={fighter.id} fighter={fighter} removeFighterFromList={this.props.removeFighterFromList} />)
+
+
+
+
+
+
 
       return(
 
@@ -23,9 +34,10 @@ render(){
         FIGHTERS
        
             {listOfFighters}
+     
 
           </>
-   )}
+      )}
 }
 
 export default Fighters;

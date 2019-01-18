@@ -19,7 +19,7 @@ render(){
             <>  
         FIGHTERS
        
-            {}
+           <FightersID id={this.props.fighter }  />
 
           </>
    )}

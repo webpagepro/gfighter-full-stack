@@ -31,7 +31,6 @@ class Fighter extends Component {
   }
 
   render() {   
-    console.log("fighter ", this.props.fighter.id)
 
     return this.props.removeFighterFromList ?(
       <div className="leftColumn" style={leftColumn.styles}>
