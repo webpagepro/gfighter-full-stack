@@ -5,7 +5,9 @@ import { Form, FormGroup, Label, Input } from 'reactstrap'
 
 class Search extends Component{
 
-_onChange = (e, changeFilter) => changeFilter(e.target.value)
+_onChange = (e, changeFilter) => {
+    changeFilter(e.target.value)
+}
 
  state = {
      filter: "", 
@@ -23,7 +25,7 @@ _onChange = (e, changeFilter) => changeFilter(e.target.value)
                     id="searchByFighter" 
                     placeholder="e.g. manny pacquaio" 
                     value={this.state.filter}
-                    onChange={e => this._onChange(e, this.state.changeFilter)} 
+                    onChange={e => this._onChange(e, this.changeFilter)} 
                 />
             </FormGroup>
         </Form>

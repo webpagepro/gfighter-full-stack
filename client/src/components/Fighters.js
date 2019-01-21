@@ -4,7 +4,8 @@ import Search from './Search'
 
 class Fighters extends Component {
     state = ({
-        filter: ''
+        filter: '',
+        changeFilter: ''
       
     })
 
@@ -13,8 +14,11 @@ class Fighters extends Component {
           filter: e.target.value
         })
     }
-    
+
     render() {
+        console.log("Fighters: ", this.state.filter)
+        console.log("Fighters: ", this.state.changeFilter)
+        console.log("Fighters this: ", this.props)
 
         if (!this.props.fighters) {
             return <div>loading</div>
@@ -22,18 +26,19 @@ class Fighters extends Component {
 
         let listOfFighters = this.props.fighters
 
-            .map(fighter => <Fighter key={fighter.id} fighter={fighter} removeFighterFromList={this.props.removeFighterFromList} />)
+            .map(fighter => <Fighter key={fighter.id} fighter={fighter} removeFighterFromList={this.props.removeFighterFromList} changeFilter={this.changeFilter} />)
 
 
         return (
 
             <div className="list">
                 FIGHTERS
-                            <Search
+                          {/*}  <Search
                                     filter={this.state.filter}
                                     changeFilter={this.state.changeFilter}
                                     listOfFighters={listOfFighters}
                                 />
+                                */}
 
                 {listOfFighters}
 

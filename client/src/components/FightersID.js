@@ -3,7 +3,7 @@ import { Button, Table, CardImg } from 'reactstrap'
 import axios from 'axios';
 import {
   BrowserRouter as Router,
-  Route, Switch, Link
+  Route, Switch, Link, Redirect
 } from 'react-router-dom'
 
 const sbutton = {
@@ -26,7 +26,8 @@ class Fighter extends Component {
     image_url: "",
     strength: "",
     redirect: false,
-    inputVal: ''
+    inputVal: '',
+    
 
   }
 
@@ -36,13 +37,17 @@ class Fighter extends Component {
         this.setState({ fighter: res.data })
       })
       .catch((err) => {
-                console.error('err', err);
-            });
+        console.error('err', err);
+      });
   }
 
   handleChange = e => {
     let { name, value } = e.target
-    this.setState({ [name]: value })
+    this.setState({ fighter: {
+      ...this.state.fighter,
+      [name] : value
+    }      
+      })
     console.log("value", value)
   }
 
@@ -50,46 +55,53 @@ class Fighter extends Component {
   _onClickEditShowForm = e => {
     this.setState(prev => {
       return {
-        editForm: !prev.editForm
+        editForm: !prev.editForm,
+        redirect: !prev.redirect
       }
     })
   }
 
   _onClickSubmitEdit = e => {
     axios.put(`http://localhost:8000/fighters/${this.state.fighter.id}`,
-     {
-                name: this.state.name,
-                bio: this.state.bio,
-                image_url: this.state.image_url,
-                strength: Number(this.state.strength)
-    })
-      .then(res => { 
-        })
+      {
+        name: this.state.fighter.name,
+        bio: this.state.fighter.bio,
+        image_url: this.state.fighter.image_url,
+        strength: Number(this.state.fighter.strength)
+      })
+      .then(res => {
+      })
       .catch(function (error) {
         console.log(error);
       })
   }
-  
+
 
   Home = () => {
     return (<h1>Back to Fighter List</h1>)
-    
-}  
+
+  }
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to={`/`} />
+    }
+  }
+
   render() {
-                console.log("this.state.fighter.id: ", this.state.fighter.id)
-                console.log("name ", this.state.name)
-                console.log("bio ", this.state.bio)
-                console.log("image_url ", this.state.image_url)
-                console.log("strength ", this.state.strength)
-               let filler = {
-                id: this.state.id,
-                name: this.state.name,
-                bio: this.state.bio,
-                image_url: this.state.image_url,
-                strength: this.state.strength,
-              
-               }
-            
+    console.log("this.state.fighter.id: ", this.props.id)
+    console.log("name ", this.state.name)
+    console.log("bio ", this.state.bio)
+    console.log("image_url ", this.state.image_url)
+    console.log("strength ", this.state.strength)
+
+
     return (
 
 
@@ -97,7 +109,7 @@ class Fighter extends Component {
         <Table striped>
 
           <tbody> <th>Fighter</th><th>Description</th><th>Strength</th>
-         
+
             <tr>
 
               <td className="name-single">{this.state.fighter.name}</td>
@@ -109,40 +121,40 @@ class Fighter extends Component {
           </tbody>
         </Table>
 
-        <div className="button-delete-single"><Button onClick={() => this.props.removeFighterFromList(this.props.id)} style={sbutton.styles}>Remove Fighter {this.props.id}</Button></div>
+        <div className="button-delete-single"><Button onClick={() => this.props.removeFighterFromList(this.props.id)}  onKeyUp={this.setRedirect} style={sbutton.styles}>Remove Fighter {this.props.id}</Button></div>
         <div className="button-edit"><Button onClick={this._onClickEditShowForm} style={sbutton.styles}>Edit Fighter {this.state.fighter.id}</Button></div>
 
         <div className="editForm-container">
 
-        
+
           {this.state.editForm ?
-            <form className="editFighterForm">
+            <form className="editFighterForm" onSubmit={this._onClickEditShowForm}>
               <label>Name</label><input
                 type="text"
-                value= {filler.name}
+                value={this.state.fighter.name}
                 name="name"
                 onChange={this.handleChange.bind(this)}
-              /> 
+              />
 
-             <label>Strength</label><input
+              <label>Strength</label><input
                 type="Number"
-                value={this.state.strength}
+                value={this.state.fighter.strength}
                 name="strength"
                 onChange={this.handleChange.bind(this)}
               />
 
               <label>image_url</label><input
                 type="text"
-                value={this.state.image_url}
+                value={this.state.fighter.image_url}
                 name="image_url"
                 onChange={this.handleChange.bind(this)}
               />
               <label>Bio</label><input
                 type="textArea"
-                value={this.state.bio}
+                value={this.state.fighter.bio}
                 name="bio"
                 onChange={this.handleChange.bind(this)}
-              /> 
+              />
               <Button onClick={this._onClickSubmitEdit} style={sbutton.styles}>Update Fighter {this.state.fighter.id}</Button>
             </form>
 
