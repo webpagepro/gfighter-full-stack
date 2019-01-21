@@ -37,7 +37,6 @@ class Fighters extends Component {
 
                 {listOfFighters}
 
-
             </div>
         )
     }

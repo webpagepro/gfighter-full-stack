@@ -64,16 +64,16 @@ class Fighter extends Component {
                 strength: Number(this.state.strength)
     })
       .then(res => { 
-         
-
         })
       .catch(function (error) {
         console.log(error);
       })
   }
+  
 
   Home = () => {
     return (<h1>Back to Fighter List</h1>)
+    
 }  
   render() {
                 console.log("this.state.fighter.id: ", this.state.fighter.id)
@@ -119,29 +119,29 @@ class Fighter extends Component {
             <form className="editFighterForm">
               <label>Name</label><input
                 type="text"
-                value= {this.state.name}
+                value= {filler.name}
                 name="name"
-                onChange={this.handleChange}
+                onChange={this.handleChange.bind(this)}
               /> 
 
              <label>Strength</label><input
                 type="Number"
                 value={this.state.strength}
                 name="strength"
-                onChange={this.handleChange}
+                onChange={this.handleChange.bind(this)}
               />
 
               <label>image_url</label><input
                 type="text"
-                value={this.state.fighter.image_url}
+                value={this.state.image_url}
                 name="image_url"
-                onChange={this.handleChange}
+                onChange={this.handleChange.bind(this)}
               />
               <label>Bio</label><input
                 type="textArea"
                 value={this.state.bio}
                 name="bio"
-                onChange={this.handleChange}
+                onChange={this.handleChange.bind(this)}
               /> 
               <Button onClick={this._onClickSubmitEdit} style={sbutton.styles}>Update Fighter {this.state.fighter.id}</Button>
             </form>

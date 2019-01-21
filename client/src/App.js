@@ -60,8 +60,6 @@ class App extends Component {
     
      <Router><ul>
 
-
-    <li><Link to='/fighters/3' params={{id: this.state.fighters}}>Test</Link></li>
     <Table>
     </Table>
 <Switch>
