@@ -1,23 +1,33 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import { Form, FormGroup, Label, Input } from 'reactstrap'
 
-const _onChange = (e, changeFilter) => changeFilter(e.target.value)
 
-export default function Search({ filteredSearch, changeFilter }) {
-    return (
+class Search extends Component{
+
+_onChange = (e, changeFilter) => changeFilter(e.target.value)
+
+ state = {
+     filter: "", 
+     changeFilter: ""
+    } 
+
+   render(){
+        return (
         <Form>
             <FormGroup>
-                <Label for="searchByTitle">Search By Title</Label>
+                <Label for="searchByFighter">Search By Fighter</Label>
                 <Input 
                     type="text" 
-                    name="searchFighter" 
-                    id="searchFighter" 
-                    placeholder="e.g. Search fighter here" 
-                    value={filteredSearch}
-                    onChange={e => _onChange(e, changeFilter)} 
+                    name="searchByFighter" 
+                    id="searchByFighter" 
+                    placeholder="e.g. manny pacquaio" 
+                    value={this.state.filter}
+                    onChange={e => this._onChange(e, this.state.changeFilter)} 
                 />
             </FormGroup>
         </Form>
     )
 }
+}
+export default Search

@@ -70,7 +70,6 @@ tr.list{
 }
 
 ul {
-
   margin-right: 30px;
 }
 
@@ -119,21 +118,24 @@ span{
   margin-right:89px;
 }
 
-.button-edit{
+   .button-edit{
   float:left;
   position:relative;
   top:-70px;
+  left:-4px;
 }
 
 form.editFighterForm{
   display:block;
-color:blue;
   width: 85%;
 }
 
 
 label{
-  text-align:right;  
+  text-align:left;  
+  width:200px;
+color: #333;
+
 }
 .editFighterForm input{
   position:relative;
@@ -146,26 +148,63 @@ label{
 
 .editForm-container{
 position:relative;
-margin-left:30px;
-width:100%;
+margin-left:35px;
+}
+
+form.editFighterForm {
+  display: flex;
+  color: blue;
+  width: 85%;
+  flex-direction:column;
 }
 
 .none{
-  min-height:90px;
+  height:190px;
 }
 
 
 
 @media (max-width: 998px){
 .none{
-  max-height:90px;
-  padding-bottom:220px;
+  height:190px;
+  padding-bottom:320px;
 }
 }
 
 @media (min-width: 998px){
   .none{
     max-height:90px;
-    padding-bottom:120px;
+    padding-bottom: 220px;
   }
+  .editForm-container{
+    position:relative;
+    }
+    max-height:100%;
+  }
+
+
+   button .btn-secondary{
+    top:100px;
+    left:-100px;
+    position:relative;
+  }
+
+  tr{
+    margin:20px 0 20px 0;
+  }
+
+  a.backTo {
+    background-color:#ccc;
+    padding: 12px;
+    border-radius:5px;
+    left:-6%;
+    position:relative;
+
+  }
+   
+  a.backTo:hover {
+    background-color:#000;
+    color:#fff;
+    text-decoration: none;
+
   }

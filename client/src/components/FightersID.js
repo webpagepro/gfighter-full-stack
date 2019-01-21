@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Table, CardImg } from 'reactstrap'
 import axios from 'axios';
-import { timingSafeEqual } from 'crypto';
-
+import {
+  BrowserRouter as Router,
+  Route, Switch, Link
+} from 'react-router-dom'
 
 const sbutton = {
   styles: {
@@ -13,24 +15,22 @@ const sbutton = {
   }
 }
 
-
-
 class Fighter extends Component {
   state = {
     fighter: {},
     editForm: false,
     editFormButton: false,
-    "id": "",
+    id: "",
     name: "",
     bio: "",
     image_url: "",
     strength: "",
-    redirect: false
+    redirect: false,
+    inputVal: ''
 
   }
 
   componentDidMount() {
-
     axios.get(`http://localhost:8000/fighters/${this.props.id}`)
       .then(res => {
         this.setState({ fighter: res.data })
@@ -43,11 +43,11 @@ class Fighter extends Component {
   handleChange = e => {
     let { name, value } = e.target
     this.setState({ [name]: value })
+    console.log("value", value)
   }
 
 
   _onClickEditShowForm = e => {
-    e.preventDefault();
     this.setState(prev => {
       return {
         editForm: !prev.editForm
@@ -61,27 +61,43 @@ class Fighter extends Component {
                 name: this.state.name,
                 bio: this.state.bio,
                 image_url: this.state.image_url,
-                strength: this.state.strength
+                strength: Number(this.state.strength)
     })
-      .then(res => {   })
+      .then(res => { 
+         
+
+        })
       .catch(function (error) {
         console.log(error);
       })
   }
 
+  Home = () => {
+    return (<h1>Back to Fighter List</h1>)
+}  
   render() {
-                console.log("this.state.id: ", this.state.fighter.id)
+                console.log("this.state.fighter.id: ", this.state.fighter.id)
                 console.log("name ", this.state.name)
                 console.log("bio ", this.state.bio)
                 console.log("image_url ", this.state.image_url)
                 console.log("strength ", this.state.strength)
+               let filler = {
+                id: this.state.id,
+                name: this.state.name,
+                bio: this.state.bio,
+                image_url: this.state.image_url,
+                strength: this.state.strength,
+              
+               }
+            
     return (
 
 
       <div>
         <Table striped>
 
-          <tbody>    <th>Fighter</th><th>Description</th><th>Strength</th>
+          <tbody> <th>Fighter</th><th>Description</th><th>Strength</th>
+         
             <tr>
 
               <td className="name-single">{this.state.fighter.name}</td>
@@ -98,55 +114,45 @@ class Fighter extends Component {
 
         <div className="editForm-container">
 
+        
           {this.state.editForm ?
-
             <form className="editFighterForm">
-            <label>ID</label> <input
+              <label>Name</label><input
                 type="text"
-                value={this.state.fighter.id}
-                name="id"
-                onChange={this.handleChange}
-              />
-              <br />
-              <label>Name</label> <input
-                type="text"
-                value={this.state.fighter.name}
+                value= {this.state.name}
                 name="name"
                 onChange={this.handleChange}
-              />
-              <br />
-              <label>Bio</label><input
-                type="textarea"
-                value={this.state.fighter.bio}
-                name="bio"
-                onChange={this.handleChange}
-              />
-              <br />
-              <label>Strength</label> <input
-                type="text"
-                value={this.state.fighter.strength}
+              /> 
+
+             <label>Strength</label><input
+                type="Number"
+                value={this.state.strength}
                 name="strength"
                 onChange={this.handleChange}
               />
 
-              <br />
-              <label>image_url</label> <input
+              <label>image_url</label><input
                 type="text"
                 value={this.state.fighter.image_url}
                 name="image_url"
                 onChange={this.handleChange}
               />
-
-
+              <label>Bio</label><input
+                type="textArea"
+                value={this.state.bio}
+                name="bio"
+                onChange={this.handleChange}
+              /> 
               <Button onClick={this._onClickSubmitEdit} style={sbutton.styles}>Update Fighter {this.state.fighter.id}</Button>
             </form>
+
             : null}
 
 
 
 
         </div>
-
+        <Link to='/' className="backTo">Back to Fighter List</Link>
       </div>
     )
   }
