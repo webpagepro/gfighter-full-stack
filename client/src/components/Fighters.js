@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import Fighter from './Fighter'
-import App from '../App'
-import { Row, Container, Table, PropTypes,  } from 'reactstrap'
-
+//import Search from './Search'
 
 class Fighters extends Component {
  state = ({
-filteredSearch:  '',
-type: 'title'
-
+filteredSearch:  ''
  })
+
+
+
+ changeFilter = (options) => {
+      this.setState({filteredSearch: options})
+  }
 
 render(){
 
@@ -23,20 +25,16 @@ render(){
  .map(fighter => <Fighter key={fighter.id} fighter={fighter} removeFighterFromList={this.props.removeFighterFromList} />)
 
 
-
-
-
-
-
       return(
 
-            <>  
-        FIGHTERS
+            <div className="list">  
+        FIGHTERS {/*<Search change={this.changeFilter} filteredSearch={this.filteredSearch}/> */}
+
        
             {listOfFighters}
      
 
-          </>
+          </div>
       )}
 }
 

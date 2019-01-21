@@ -30,15 +30,23 @@ add: (req, res) => {
 },
 
 update:(req, res) => {
-    knex('fighters')
-    .where('id', req.params.id)
-    .update({
-        name:req.body.name,
+    console.log("id", req.params.id, req.body)
+        knex('fighters') 
+   .update({ 
+       name: req.body.name,
         bio: req.body.bio,
         image_url: req.body.image_url,
         strength: req.body.strength
         })
+    .where('id', req.params.id)    
     .then(fighter => res.json(fighter))
+},
+
+update2:(req, res) => {
+knex('fighters')
+.where('id', req.params.id)
+.update(req.body, '*')
+.then(fighter => res.json(fighter))
 },
 
 
@@ -48,7 +56,7 @@ plus:(req, res) => {
       name:req.body.name,
       bio: req.body.bio,
       image_url: req.body.image_url,
-      strength: req.body.strength
+      
       }, '*')
   .then(fighter => res.json(fighter[0]))
 },

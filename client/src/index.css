@@ -28,7 +28,8 @@ code {
   font-weight: bold;
   text-align:left;
    padding-right:8px;
-   width:18%
+   width:24%;
+   font-size:1.2em;
 }
 
 .bio-single{
@@ -84,7 +85,7 @@ th .scope,th {
   }
 
   .name-single{
-    font-size:2em;
+    font-size:1em;
   }
 }
 
@@ -124,8 +125,47 @@ span{
   top:-70px;
 }
 
-.editFighterForm{
-  display:flex;
-  flex-direction: column;
-  width: 30%;
+form.editFighterForm{
+  display:block;
+color:blue;
+  width: 85%;
 }
+
+
+label{
+  text-align:right;  
+}
+.editFighterForm input{
+  position:relative;
+
+}
+.search-title{
+  position:relative;
+  left:-229px;
+}
+
+.editForm-container{
+position:relative;
+margin-left:30px;
+width:100%;
+}
+
+.none{
+  min-height:90px;
+}
+
+
+
+@media (max-width: 998px){
+.none{
+  max-height:90px;
+  padding-bottom:220px;
+}
+}
+
+@media (min-width: 998px){
+  .none{
+    max-height:90px;
+    padding-bottom:120px;
+  }
+  }

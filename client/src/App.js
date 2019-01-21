@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Search from './components/Search';
+//import Search from './components/Search';
 import { Row, Container, Table, PropTypes,  } from 'reactstrap'
 import './App.css';
 import App2 from './App2'
@@ -23,7 +23,7 @@ class App extends Component {
     fighters: [],
     fighter: {},
     strength: 100, 
-     filteredSearch: ''
+     filteredSearch: " "
   }
 
   async componentDidMount() {
@@ -65,17 +65,20 @@ class App extends Component {
   render() {
     return (      
 
-    <div className="App">
-     <Search fighters={this.state.fighters.filter(ordered => ordered.name.includes(this.state.filteredSearch))} filteredFighterSearch={this.filteredFighterSearch} />
+    <div className="App"><Container>
+    
      <Router><ul>
 
     <li><Link to='/'>Home</Link></li>
     <li><Link to='/fighters/3' params={{id: this.state.fighters}}>Test</Link></li>
+    <Table>
+    </Table>
 <Switch>
+
             <Route exact path="/" render={(props) => <Fighters fighters={this.state.fighters} removeFighterFromList={this.removeFighterFromList} filteredSearch={this.state.filteredSearch}  getIndividualFighter={this.getIndividualFighter} />} />
             <Route exact path='/fighters/:id' render={(data) =>  {
                 console.log("APP: ", data)
-                return <FighterIndividual id={data.match.params.id} />
+                return <FighterIndividual id={data.match.params.id} removeFighterFromList={this.removeFighterFromList}/>
             }  }/> 
            
 </Switch>
@@ -84,6 +87,7 @@ class App extends Component {
        </ul>
        
        </Router>
+       </Container>
       </div>
     );
   }

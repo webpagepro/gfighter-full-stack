@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 //import logo from './logo.svg';  import Search from './components/Search';
-import { Row, Container,  } from 'reactstrap'
 import './App.css';
-import Search from './components/Search.js';
 import Header from './components/Header.js';
 import TopNavBar from './components/TopNavBar';
 import Footer from './components/Footer';

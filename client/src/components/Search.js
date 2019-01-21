@@ -1,39 +1,23 @@
-import React, { Component } from 'react'
-import { Form, FormGroup, Label, Input} from 'reactstrap';
+import React from 'react'
 
+import { Form, FormGroup, Label, Input } from 'reactstrap'
 
-const searchInput = {
-    styles: {
-        marginLeft: "35%",
-        width: "30%"
-    }
+const _onChange = (e, changeFilter) => changeFilter(e.target.value)
+
+export default function Search({ filteredSearch, changeFilter }) {
+    return (
+        <Form>
+            <FormGroup>
+                <Label for="searchByTitle">Search By Title</Label>
+                <Input 
+                    type="text" 
+                    name="searchFighter" 
+                    id="searchFighter" 
+                    placeholder="e.g. Search fighter here" 
+                    value={filteredSearch}
+                    onChange={e => _onChange(e, changeFilter)} 
+                />
+            </FormGroup>
+        </Form>
+    )
 }
-
-const searchHere = {
-    styles: {
-        fontSize: "20px",
-        marginTop: "3%",
-        marginLeft: "42%"
-    }
-}
-
-
-
-class Search extends Component {
-    render () {
-        return (
-            <>
-            <Form>
-                <FormGroup>
-                    <Label style={searchHere.styles}for="search">Search For a Fighter Here</Label>
-                    <Input onChange={this.props.filterBookSearch} style={searchInput.styles} type="text" name="search" id="" placeholder="..." />
-                
-                </FormGroup>
-            </Form>
-            </>
-        )
-    }
-}
-
-
-export default Search;

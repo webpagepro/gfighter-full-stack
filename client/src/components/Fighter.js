@@ -40,9 +40,10 @@ class Fighter extends Component {
     
      <Table striped>
 
-   <tbody>
+   <tbody>    
+
      <tr className="list">
-       <th scope="row"></th>
+       <th scope="row">{this.props.fighter.id}</th>
        <td className="name-list"><Link to={`fighters/${this.props.fighter.id}`} >{this.props.fighter.name}</Link></td>
        <td className="bio-list">{this.props.fighter.bio}</td>
        {/*<td><CardImg width='50' src={this.props.fighter.image_url} alt="Card image" /></td> */}
@@ -56,7 +57,7 @@ class Fighter extends Component {
         <div className="button"><Button onClick={() => this.props.removeFighterFromList(this.props.fighter.id)} style={sbutton.styles}>Remove Fighter {this.props.fighter.id}</Button></div>
 
       </div>
-    ):(<div>loading</div>)
+    ):(<div>Figher.js error loading</div>)
   }
 }
 export default Fighter
