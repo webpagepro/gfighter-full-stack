@@ -5,16 +5,37 @@ import { Form, FormGroup, Label, Input } from 'reactstrap'
 
 class Search extends Component{
 
-_onChange = (e, changeFilter) => {
-    changeFilter(e.target.value)
-}
-
- state = {
+    state = {
      filter: "", 
      changeFilter: ""
     } 
+ 
+  /*  _onChange = e => {
+        let { name, value } = e.target
+        this.setState({ 
+          [name] : value     
+          })
+          console.log("name: ", name)
+        console.log("value: ", value)
+      }
+   */ 
+
+    _onChange = (e) => {
+        let { name, value } = e.target
+        this.setState({ filter : {
+            ...this.state.filter,
+            [name] : value
+        }   
+        })
+        console.log("Fighters name: ", name)
+        console.log("Fighters value: ", value)
+    }
+
 
    render(){
+
+    console.log("Search: ", this)
+
         return (
         <Form>
             <FormGroup>
@@ -24,7 +45,7 @@ _onChange = (e, changeFilter) => {
                     name="searchByFighter" 
                     id="searchByFighter" 
                     placeholder="e.g. manny pacquaio" 
-                    value={this.state.filter}
+                    value={this.filter}
                     onChange={e => this._onChange(e, this.changeFilter)} 
                 />
             </FormGroup>

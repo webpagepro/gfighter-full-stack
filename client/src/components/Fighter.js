@@ -27,14 +27,13 @@ class Fighter extends Component {
   handleChange = e => {
     let { name, value } = e.target
     this.setState({ [name]: value })
-
   }
 
   render() {   
 
 
 
-    return this.props.removeFighterFromList ?(
+    return this.props.routeChange ?(
       <div className="none" style={leftColumn.styles}>
      
     

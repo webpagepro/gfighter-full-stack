@@ -4,8 +4,8 @@ import FightersID from './FightersID';
 
 class Fighters extends Component {
  state = ({
-filteredSearch:  '',
-type: 'title'
+      filter: '',
+      changeFilter: ''
 
  })
  
@@ -17,7 +17,13 @@ console.log("FighterIndividual: ", this.props)
             <>  
         FIGHTERS
        
-           <FightersID id={this.props.id }  removeFighterFromList={this.props.removeFighterFromList} />
+           <FightersID id={this.props.id }  
+           removeFighterFromList={this.props.removeFighterFromList} 
+           changeFilter={this.state.changeFilter} 
+            filter={this.state.filter} 
+            routeChange={this.props.routeChange}
+            data={this.props.data}
+            />
 
           </>
    )}

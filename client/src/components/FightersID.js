@@ -5,6 +5,8 @@ import {
   BrowserRouter as Router,
   Route, Switch, Link, Redirect
 } from 'react-router-dom'
+import {withRouter, browserHistory } from 'react-router-dom'
+
 
 const sbutton = {
   styles: {
@@ -16,19 +18,19 @@ const sbutton = {
 }
 
 class Fighter extends Component {
+
   state = {
     fighter: {},
-    editForm: false,
-    editFormButton: false,
     id: "",
     name: "",
     bio: "",
     image_url: "",
     strength: "",
     redirect: false,
-    inputVal: '',
-    
-
+    editForm: false,
+    editedForm: false,
+    editFormButton: false,
+    path: '/'
   }
 
   componentDidMount() {
@@ -41,25 +43,29 @@ class Fighter extends Component {
       });
   }
 
+
   handleChange = e => {
     let { name, value } = e.target
-    this.setState({ fighter: {
-      ...this.state.fighter,
-      [name] : value
-    }      
-      })
-    console.log("value", value)
+    this.setState({
+      fighter: {
+        ...this.state.fighter,
+        [name]: value,
+        redirect: true
+      }
+      
+    })
   }
 
 
   _onClickEditShowForm = e => {
     this.setState(prev => {
       return {
-        editForm: !prev.editForm,
-        redirect: !prev.redirect
+        editForm: !prev.editForm
       }
     })
   }
+
+
 
   _onClickSubmitEdit = e => {
     axios.put(`http://localhost:8000/fighters/${this.state.fighter.id}`,
@@ -70,45 +76,57 @@ class Fighter extends Component {
         strength: Number(this.state.fighter.strength)
       })
       .then(res => {
+        this.setState({editForm: false})
       })
       .catch(function (error) {
         console.log(error);
       })
   }
 
-
   Home = () => {
     return (<h1>Back to Fighter List</h1>)
+  }
 
+  Fighter = () => {
+    return (<h1>Refresh</h1>)
   }
 
   setRedirect = () => {
-    this.setState({
-      redirect: true
-    })
+this.setState({
+  redirect: true
+})
   }
 
   renderRedirect = () => {
+   // alert('test redirect')
     if (this.state.redirect) {
       return <Redirect to={`/`} />
     }
+  } 
+
+ 
+  routeChange = () => {
+    let path = '/';
+   this.props.history.push(path);
   }
 
+
+
   render() {
-    console.log("this.state.fighter.id: ", this.props.id)
+ /*   console.log("PROPS: ", this)
     console.log("name ", this.state.name)
     console.log("bio ", this.state.bio)
     console.log("image_url ", this.state.image_url)
     console.log("strength ", this.state.strength)
-
+  */
 
     return (
 
-
       <div>
         <Table striped>
+          <th>Fighter</th><th>Description</th><th>Strength</th>
 
-          <tbody> <th>Fighter</th><th>Description</th><th>Strength</th>
+          <tbody>
 
             <tr>
 
@@ -121,8 +139,26 @@ class Fighter extends Component {
           </tbody>
         </Table>
 
-        <div className="button-delete-single"><Button onClick={() => this.props.removeFighterFromList(this.props.id)}  onKeyUp={this.setRedirect} style={sbutton.styles}>Remove Fighter {this.props.id}</Button></div>
-        <div className="button-edit"><Button onClick={this._onClickEditShowForm} style={sbutton.styles}>Edit Fighter {this.state.fighter.id}</Button></div>
+        <div className="button-delete-single"><Button onClick={() => this.props.removeFighterFromList(this.props.id)} 
+        routeChange={this.props.routeChange} 
+         style={sbutton.styles}>Remove Fighter {this.props.id}</Button></div>
+
+        <div className="button-edit"><Button onClick={this._onClickEditShowForm} 
+        style={sbutton.styles}>Edit Fighter {this.state.fighter.id}</Button></div>
+
+
+
+
+
+
+        <div className="button-delete-single"><Button onClick={this.routeChange} 
+         style={sbutton.styles} 
+        >Test Redirect</Button></div>
+       
+
+
+
+
 
         <div className="editForm-container">
 
@@ -160,9 +196,6 @@ class Fighter extends Component {
 
             : null}
 
-
-
-
         </div>
         <Link to='/' className="backTo">Back to Fighter List</Link>
       </div>
@@ -170,4 +203,6 @@ class Fighter extends Component {
   }
 
 }
-export default Fighter
+
+//export default Fighter
+export default withRouter(Fighter)
