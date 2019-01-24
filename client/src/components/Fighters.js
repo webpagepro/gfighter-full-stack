@@ -10,7 +10,7 @@ class Fighters extends Component {
     })
 
     changeFilter = (e) => {
-        this.setState({ fightersf : {
+        this.setState({ fighters : {
             ...this.state.fighter,
             name : e.target.value
         }   
@@ -19,7 +19,7 @@ class Fighters extends Component {
 
     render() {
         console.log("Fighters filter: ", this.state.filter)
-        console.log("Fighters changeFilter: ", this.state.changeFilter)
+        console.log("Fighters changeFilter: ", this.changeFilter)
         console.log("Fighters this: ", this.props)
 
         if (!this.props.fighters) {
@@ -44,7 +44,6 @@ console.log("filter", this.filter)
                                     filter={this.state.filter}
                                     changeFilter={this.state.changeFilter}
                                     fighters={this.props.fighters}
-                                    routeChange={this.props.routeChange}
                                 />
                                 
 

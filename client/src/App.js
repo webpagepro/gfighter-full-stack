@@ -40,12 +40,13 @@ class App extends Component {
   }
 
   // ? this.state.books.filter(book => book.title.includes(this.state.filter)) : this.state.books
-  removeFighterFromList = id => {
+  removeFighterFromList = (id, history) => {
     axios.delete(`http://localhost:8000/fighters/${id}`)
       .then(res => {
         let otherFighters = this.state.fighters
         this.setState({ fighters: [...otherFighters.filter(fighter => fighter.id !== id)] })
         console.log("App.js - removeFighterFromDebt: ", res.data)
+        history.push('/')
       })
   }
 
@@ -57,27 +58,22 @@ class App extends Component {
         console.log("App.js - addFighterToList: ", res.data)
       })
   }
-
-  routeChange = () => {
-    let path = '/';
-   this.props.history.push(path).bind(this);
-  }
-
-  setRedirect = () => {
-    this.setState({
-      redirect: true
-    })
-      }
     
       renderRedirect = () => {
-        alert('test redirect')
-        if (this.state.redirect) {
+        // alert('test redirect')
+       // if (this.state.redirect) {
           return <Redirect to={`/`} />
-        }
       } 
     
-     
+  routeChange = () => {
+      let path = '/';
+     this.props.history.push(path);
+    } 
+
   render() {
+
+    
+
     return (
 
       <div className="App"><Container>
@@ -99,7 +95,7 @@ class App extends Component {
               console.log("APP: ", data)
               return <FighterIndividual id={data.match.params.id} 
               removeFighterFromList={this.removeFighterFromList} 
-              routeChange={this.routeChange.bind(this)}  
+              routeChange={this.routeChange}  
               data={data}
               />
             }} />

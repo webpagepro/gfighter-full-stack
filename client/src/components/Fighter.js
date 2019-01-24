@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Table} from 'reactstrap'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+
 
 const sbutton = {
   styles: {
@@ -33,7 +34,7 @@ class Fighter extends Component {
 
 
 
-    return this.props.routeChange ?(
+    return (
       <div className="none" style={leftColumn.styles}>
      
     
@@ -52,10 +53,10 @@ class Fighter extends Component {
  
      
 
-        <div className="button"><Button onClick={() => this.props.removeFighterFromList(this.props.fighter.id)} style={sbutton.styles}>Remove Fighter {this.props.fighter.id}</Button></div>
+        <div className="button"><Button onClick={() => this.props.removeFighterFromList(this.props.fighter.id, this.props.history)} style={sbutton.styles}>Remove Fighter {this.props.fighter.id}</Button></div>
 
       </div>
-    ):(<div>Figher.js error loading</div>)
+    )
   }
 }
-export default Fighter
+export default withRouter(Fighter)

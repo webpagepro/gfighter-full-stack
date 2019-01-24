@@ -50,7 +50,6 @@ class Fighter extends Component {
       fighter: {
         ...this.state.fighter,
         [name]: value,
-        redirect: true
       }
       
     })
@@ -92,6 +91,7 @@ class Fighter extends Component {
   }
 
   setRedirect = () => {
+    alert('test redirect')
 this.setState({
   redirect: true
 })
@@ -139,25 +139,13 @@ this.setState({
           </tbody>
         </Table>
 
-        <div className="button-delete-single"><Button onClick={() => this.props.removeFighterFromList(this.props.id)} 
-        routeChange={this.props.routeChange} 
+        <div className="button-delete-single"><Button onClick={
+          () => this.props.removeFighterFromList(this.props.id, this.props.history)} 
+        
          style={sbutton.styles}>Remove Fighter {this.props.id}</Button></div>
 
         <div className="button-edit"><Button onClick={this._onClickEditShowForm} 
         style={sbutton.styles}>Edit Fighter {this.state.fighter.id}</Button></div>
-
-
-
-
-
-
-        <div className="button-delete-single"><Button onClick={this.routeChange} 
-         style={sbutton.styles} 
-        >Test Redirect</Button></div>
-       
-
-
-
 
 
         <div className="editForm-container">
