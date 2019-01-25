@@ -43,8 +43,12 @@ class App extends Component {
   removeFighterFromList = (id, history) => {
     axios.delete(`http://localhost:8000/fighters/${id}`)
       .then(res => {
-        let otherFighters = this.state.fighters
-        this.setState({ fighters: [...otherFighters.filter(fighter => fighter.id !== id)] })
+        let otherFighters = this.state.fighters.filter(fighter => {
+          console.log(`deleted id is ${id} ---------- fighter id is: ${fighter.id}`)
+          return fighter.id !== parseInt(id)
+        })
+        console.log('---------------',otherFighters)
+        this.setState({ fighters: [...otherFighters] })
         console.log("App.js - removeFighterFromDebt: ", res.data)
         history.push('/')
       })
@@ -65,10 +69,6 @@ class App extends Component {
           return <Redirect to={`/`} />
       } 
     
-  routeChange = () => {
-      let path = '/';
-     this.props.history.push(path);
-    } 
 
   render() {
 
