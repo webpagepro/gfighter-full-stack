@@ -1,11 +1,11 @@
-let connectionString = process.platform === 'win32' ? 'postgres://postgres:root@localhost/gfighter' : 'postgres://localhost/gfighter'
+let connectionString = process.platform === 'win32' ? 'postgres://postgres:xxxxxxxxx@localhost/xxxxxx' : 'postgres://localhost/xxxxxxx'
   
   module.exports = {
     development: {
         client: 'pg',
         connection: {
-          database: "fighters",
-          host: "localhost"
+          database: "",
+          host: ""
         },
         migrations: {
             directory: __dirname + '/db/migrations',
